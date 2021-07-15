@@ -7,24 +7,47 @@
     <title>今天吃什么</title>
     <script src="https://cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js"></script>
     <style>
+        html,body{
+            height: 100%;
+            overflow: hidden;
+            /* background-image: linear-gradient( 135deg, #ABDCFF 10%, #0396FF 100%); */
+        }
             .content{
               margin-top: 35vh;  
               text-align: center;
+              
             }
-            .content p{
-                color: rgb(145, 145, 145);
+            .content h1{ 
+                color: rgb(179, 174, 174);
             }
             .content button{
               margin-top: 2vh;  
-               
+             
+                text-align: center; 
+                font: 16px/100% 'Microsoft yahei',Arial, Helvetica, sans-serif;
+                padding: .5em 2em .55em;
+                
+                -webkit-border-radius: .5em;
+                -moz-border-radius: .5em;
+                border-radius: .5em;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                box-shadow: 0 1px 2px rgba(0,0,0,.2);
+                background-color:  #1976D2;
+                color: #fff;
+ 
+            }
+            #name{
+                font: bold;
+        
             }
     </style>
 </head>
 <body>
     
     <div class="content">
-        <p>今天吃什么？</p>
-        <span id="name">炖酸菜</span>
+        <h1>今天吃什么？</h1>
+        <span id="name">减肥不吃</span>
         <br/>
         <button>随机</button>
     </div>
@@ -48,25 +71,42 @@
         // }
         var isrunning=false;
         var timer=null;
+        var maxtime=3000;
+        var step=100;
+        var time=0;
         $(function(){
+           
             $(".content button").on("click",function(){
-                
-                if($(this).text()=="停止"){
-                    $(this).text("开始")
-                    clearInterval(timer);
+                if(isrunning)
+                    return;
+                isrunning=true;
+                timer=setInterval(function(){
+                    var i = Math.floor(Math.random() * menu.length + 1)-1;
+                    $("#name").text(menu[i]);
+                    //$("#name").css("color",getRandomColor())
+                    time+=step;
+                    if(time>maxtime){
+                        clearInterval(timer);
+                        isrunning=false;
+                        time=0;
+                    }
+                },step)
 
-                }else{
-                    $(this).text("停止")
-                    timer=setInterval(function(){
-                        var i = Math.floor(Math.random() * menu.length + 1)-1;
-                        $("#name").text(menu[i])
-                        
-                    },100)
-                } 
+              
             })
 
         })
+        var getRandomColor = function(){
 
+            return (function(m,s,c){
+
+            return (c ? arguments.callee(m,s,c-1) : '#') +
+
+                s[m.floor(m.random() * 16)]
+
+            })(Math,'0123456789abcdef',5)
+
+        }
     </script>
 </body>
 </html>
