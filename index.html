@@ -77,20 +77,21 @@
         $(function(){
            
             $(".content button").on("click",function(){
-                if(isrunning)
-                    return;
-                isrunning=true;
-                timer=setInterval(function(){
-                    var i = Math.floor(Math.random() * menu.length + 1)-1;
-                    $("#name").text(menu[i]);
-                    //$("#name").css("color",getRandomColor())
-                    time+=step;
-                    if(time>maxtime){
-                        clearInterval(timer);
-                        isrunning=false;
-                        time=0;
-                    }
-                },step)
+                // if(isrunning)
+                //     return;
+                // isrunning=true;
+                $("#name").text(menu[ Math.floor(Math.random() * menu.length + 1)-1]);
+                // timer=setInterval(function(){
+                //     var i = Math.floor(Math.random() * menu.length + 1)-1;
+                //     $("#name").text(menu[i]);
+                //     //$("#name").css("color",getRandomColor())
+                //     time+=step;
+                //     if(time>maxtime){
+                //         clearInterval(timer);
+                //         isrunning=false;
+                //         time=0;
+                //     }
+                // },step)
 
               
             })
