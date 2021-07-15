@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>今天吃什么</title>
+    <script src="https://cdn.jsdelivr.net/jquery/2.2.4/jquery.min.js"></script>
+    <style>
+            .content{
+              margin-top: 35vh;  
+              text-align: center;
+            }
+            .content p{
+                color: rgb(145, 145, 145);
+            }
+            .content button{
+              margin-top: 2vh;  
+               
+            }
+    </style>
+</head>
+<body>
+    
+    <div class="content">
+        <p>今天吃什么？</p>
+        <span id="name">炖酸菜</span>
+        <br/>
+        <button>随机</button>
+    </div>
+
+    <script>
+        var menu=[];
+        function rand(min, max){
+            return parseInt(Math.random() * (max - min + 1) + min);
+        }
+        // function read_menu(){
+        //     if(localStorage){
+        //         var m = localStorage.chishenme_menu;
+        //         if(m == null){
+        menu = ["韩料","日料","火锅","酸菜鱼","烤肉","烧烤","泰国菜","饼类","寿司","芝士条","披萨","肯德基","奶茶","炸鸡","家常菜","东北菜","面","饺子","甜品","蛋糕(面包）","减肥不吃"];
+        //         } else {
+        //             menu = JSON.parse(m);
+        //         }
+        //     } else {
+        //         menu = ["屎"];
+        //     }
+        // }
+        var isrunning=false;
+        var timer=null;
+        $(function(){
+            $(".content button").on("click",function(){
+                
+                if($(this).text()=="停止"){
+                    $(this).text("开始")
+                    clearInterval(timer);
+
+                }else{
+                    $(this).text("停止")
+                    timer=setInterval(function(){
+                        var i = Math.floor(Math.random() * menu.length + 1)-1;
+                        $("#name").text(menu[i])
+                        
+                    },100)
+                } 
+            })
+
+        })
+
+    </script>
+</body>
+</html>
